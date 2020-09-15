@@ -1,26 +1,31 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import 'antd/dist/antd.css';
+import DoneComponent from "./components/Done/DoneComponent";
+import InProgressComponent from "./components/InProgress/InProgressComponent";
+import TodoListComponent from "./components/TodoList/TodoListComponent";
+import {Row, Col} from 'antd';
+import TodoListComponentContainer from "./components/TodoList/TodoListComponentContainer";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <>
+            <Row justify="space-around">
+                <Col span={6}>
+                    <TodoListComponentContainer/>
+                </Col>
+
+                <Col span={6}>
+                    <InProgressComponent/>
+                </Col>
+
+                <Col span={6}>
+                    <DoneComponent/>
+                </Col>
+            </Row>
+        </>
+
+    );
 }
 
 export default App;

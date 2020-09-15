@@ -1,0 +1,31 @@
+.todoBlock{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px;
+    background-color: lightslategrey;
+}
+
+.titleRow{
+    min-height: 40px;
+    width: 100%;
+    background-color: gray;
+    color: #ffffff;
+    font-size: 18px;
+    padding: 5px;
+}
+
+.descriptionRow{
+    min-height: 50px;
+    padding: 10px;
+}
+
+.changeStateButtons{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+button{
+    display: flex;
+}
