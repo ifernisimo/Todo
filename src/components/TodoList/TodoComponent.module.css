@@ -1,5 +1,5 @@
 .border{
-    height: 100vh;
+    height: 80vh;
     border: 1px solid black;
     overflow: scroll;
 }
