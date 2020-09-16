@@ -1,5 +1,11 @@
-.border{
-    height: 80vh;
-    border: 1px solid black;
-    overflow: scroll;
+.todoBlock{
+    height: 70vh;
+    background: #FFFFFF;
+    box-shadow: 0px 7px 20px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    overflow-y: scroll;
+}
+
+.todoBlock h1{
+    text-align: center;
 }
