@@ -1,3 +1,9 @@
 body{
     background: linear-gradient(245.37deg, #4ED2DB 0%, #77FFB6 100%);
 }
+
+.wrapper{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}

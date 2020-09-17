@@ -11,19 +11,13 @@ function App() {
   return (
     <>
       <AddTodoComponentContainer />
-      <Row justify="space-around">
-        <Col span={6}>
-          <TodoListComponentContainer />
-        </Col>
+      <div className="wrapper">
+        <TodoListComponentContainer />
 
-        <Col span={6}>
-          <InProgressComponent />
-        </Col>
+        <InProgressComponent />
 
-        <Col span={6}>
-          <DoneComponent />
-        </Col>
-      </Row>
+        <DoneComponent />
+      </div>
     </>
   );
 }

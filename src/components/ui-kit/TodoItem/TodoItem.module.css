@@ -15,6 +15,7 @@
     width: 100%;
     font-size: 18px;
     padding: 5px;
+    word-break: break-all;
 }
 .titleRowTitle{
     display: flex;
@@ -23,8 +24,8 @@
 }
 
 .trashBtn{
-    width: 30px;
-    height: 30px;
+    width: 35px;
+    height: 35px;
     background: linear-gradient(260.15deg, #F2C58F 0%, #F28F8F 100%);
     border: 1px solid rgba(255, 255, 255, 0.5);
     border-radius: 5px;
@@ -43,8 +44,8 @@
 }
 
 .penBtn{
-    width: 30px;
-    height: 30px;
+    width: 35px;
+    height: 35px;
     background: linear-gradient(260.15deg, #F2C58F 0%, #F28F8F 100%);
     border: 1px solid rgba(255, 255, 255, 0.5);
     border-radius: 5px;
@@ -52,7 +53,9 @@
 
 .descriptionRow{
     min-height: 50px;
+    width: 100%;
     padding: 10px;
+    word-break: break-all;
 }
 
 .changeStateButtons{

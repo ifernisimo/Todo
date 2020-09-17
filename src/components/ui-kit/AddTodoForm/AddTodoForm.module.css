@@ -1,7 +1,9 @@
 .addNewTodoBlock{
     display: flex;
     justify-content: center;
-    margin-top: 40px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 240px;
 }
 
 .titleColumn{
@@ -17,7 +19,7 @@
 }
 
 .formColumn{
-    width: 550px;
+    width: 520px;
     display: flex;
     padding: 10px;
     flex-direction: column;
