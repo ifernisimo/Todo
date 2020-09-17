@@ -35,8 +35,8 @@ let initialState = {
       priority: 5,
     },
   ],
-  priorityLevels: [1, 2, 3, 4, 5],
   lastTaskId: 5,
+  editMode: true,
 };
 
 const todoReducer = (state = initialState, action) => {

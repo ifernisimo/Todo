@@ -5,6 +5,7 @@ import { compose } from "redux";
 let mapStateToProps = (state) => {
   return {
     todoArray: state.todo.todoArray,
+    editMode: state.todo.editMode,
   };
 };
 
