@@ -6,7 +6,14 @@ const TodoItem = (props) => {
       <div className={styles.titleRow} justify="space-around">
         <div className={styles.titleRowTitle}>{props.title}</div>
         <div>
-          <button className={styles.trashBtn}>Tr</button>
+          <button
+            onClick={() => {
+              props.deleteTodo(props.id);
+            }}
+            className={styles.trashBtn}
+          >
+            Tr
+          </button>
         </div>
         <div>
           <button className={styles.penBtn}>Ed</button>

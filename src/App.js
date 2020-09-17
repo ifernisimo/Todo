@@ -3,7 +3,6 @@ import "./App.css";
 import "antd/dist/antd.css";
 import DoneComponent from "./components/Done/DoneComponent";
 import InProgressComponent from "./components/InProgress/InProgressComponent";
-import { Row, Col } from "antd";
 import TodoListComponentContainer from "./components/TodoList/TodoListComponentContainer";
 import AddTodoComponentContainer from "./components/AddTodoComponent/AddTodoComponentContainer";
 

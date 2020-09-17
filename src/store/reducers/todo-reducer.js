@@ -51,7 +51,11 @@ const todoReducer = (state = initialState, action) => {
     case DELETE_TODO: {
       return {
         ...state,
-        //Удаление
+        todoArray: [
+          ...state.todoArray.filter((todo) => {
+            return todo.id !== action.deleteTodoId;
+          }),
+        ],
       };
     }
 
@@ -72,9 +76,9 @@ export const addNewTodo = (id, title, description, priority) => ({
   payload: { id, title, description, priority },
 });
 
-export const deleteTodo = (todo) => ({
+export const deleteTodo = (deleteTodoId) => ({
   type: DELETE_TODO,
-  todo,
+  deleteTodoId,
 });
 
 export const setLastTaskId = (lastId) => ({

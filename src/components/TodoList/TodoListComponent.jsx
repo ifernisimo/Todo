@@ -1,13 +1,14 @@
 import React from "react";
 import styles from "./TodoComponent.module.css";
-import TodoItem from "../ui-kit/TodoItem/TodoItem";
+import TodoItemContainer from "../ui-kit/TodoItem/TodoItemContainer";
 
 const TodoListComponent = ({ todoArray }) => {
   let listOfTodo = todoArray.map((todo, idx) => (
-    <TodoItem
+    <TodoItemContainer
       title={todo.title}
       description={todo.description}
       priority={todo.priority}
+      id={todo.id}
       key={idx}
     />
   ));

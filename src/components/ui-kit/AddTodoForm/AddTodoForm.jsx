@@ -22,6 +22,7 @@ const AddTodoForm = (props) => {
               name={"taskTitle"}
               component={"input"}
               placeholder={"Название задачи..."}
+              required
             />
 
             <Field type={"text"} name={"prioritySelector"} component={"select"}>
