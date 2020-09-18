@@ -1,13 +1,16 @@
-/*import React from "react";
-import TodoItemEditFormRedux from "./TodoItemEditForm";
+import React from "react";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import TodoItemEditForm from "./TodoItemEditForm";
 
-const TodoItemEditFormContainer = (props) => {
-  return <TodoItemEditForm {...props} />;
-};
+import { initialize } from "redux-form";
+
+class TodoItemEditFormContainer extends React.Component {
+  render() {
+    return <TodoItemEditForm {...this.props} />;
+  }
+}
 
 const mapStateToProps = (state) => ({});
 
-export default compose(connect(mapStateToProps, {}))(TodoItemEditFormContainer);*/
+export default compose(connect(mapStateToProps, {}))(TodoItemEditFormContainer);

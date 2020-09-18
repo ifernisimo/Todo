@@ -7,13 +7,13 @@ let initialState = {
     {
       id: 1,
       title: "Купить носки",
-      description: "Проебано 4 пары в стиралке",
+      description: "4 пары утеряны в недрах в стиралки",
       priority: 5,
     },
     {
       id: 2,
       title: "Убить велосипед",
-      description: "Не ну а хуле он",
+      description: "Не ну а че он",
       priority: 5,
     },
     {
@@ -25,13 +25,13 @@ let initialState = {
     {
       id: 4,
       title: "Любить свою малышку",
-      description: "Готово ",
+      description: "Готово",
       priority: 5,
     },
     {
       id: 5,
-      title: "Закрывать унитаз",
-      description: "Ире воняет",
+      title: "Закрывать двери",
+      description: "сквозняк не шуточный",
       priority: 5,
     },
   ],

@@ -1,22 +1,20 @@
 import React from "react";
 import styles from "./TodoItem.module.css";
-
+import { initialize } from "redux-form";
 import { Field, reduxForm, Form } from "redux-form";
 import handleSubmit from "redux-form/lib/handleSubmit";
 
 const TodoItemEditForm = (props) => {
-  console.log(props);
-  const val = props.title;
   return (
     <Form onSubmit={handleSubmit}>
       <div className={styles.todoBlock}>
         <div className={styles.titleRow} justify="space-around">
           <Field
             className={styles.titleRowTitle}
-            name={"titleEdit"}
+            name={"titleEdit" + props.id}
             type={"text"}
-            value={val}
             component={"input"}
+            defaultValue={props.title}
           />
           <div>
             <button
@@ -34,8 +32,8 @@ const TodoItemEditForm = (props) => {
         </div>
 
         <Field
-          value={props.description}
-          name={"descriptionEdit"}
+          defaultValue={props.description}
+          name={"descriptionEdit" + props.id}
           className={styles.descriptionRow}
           component={"textarea"}
         />
