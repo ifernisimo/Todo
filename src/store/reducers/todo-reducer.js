@@ -1,6 +1,7 @@
 const ADD_NEW_TODO = "ADD_NEW_TODO";
 const DELETE_TODO = "DELETE_TODO";
 const SET_LAST_TASK_ID = "SET_LAST_TASK_ID";
+const SWITCH_EDIT_MODE = "SWITCH_EDIT_MODE";
 
 let initialState = {
   todoArray: [
@@ -9,34 +10,38 @@ let initialState = {
       title: "Купить носки",
       description: "4 пары утеряны в недрах в стиралки",
       priority: 5,
+      editMode: false,
     },
     {
       id: 2,
       title: "Убить велосипед",
       description: "Не ну а че он",
       priority: 5,
+      editMode: false,
     },
     {
       id: 3,
       title: "Понять и принять смысл фразы",
       description: "Фраза - А че а в смысле?",
       priority: 5,
+      editMode: false,
     },
     {
       id: 4,
       title: "Любить свою малышку",
       description: "Готово",
       priority: 5,
+      editMode: false,
     },
     {
       id: 5,
       title: "Закрывать двери",
       description: "сквозняк не шуточный",
       priority: 5,
+      editMode: false,
     },
   ],
   lastTaskId: 5,
-  editMode: true,
 };
 
 const todoReducer = (state = initialState, action) => {
@@ -66,6 +71,19 @@ const todoReducer = (state = initialState, action) => {
       };
     }
 
+    case SWITCH_EDIT_MODE: {
+      return {
+        ...state,
+        todoArray: [
+          ...state.todoArray.map((todo) => {
+            return todo.id === action.editTodoId
+              ? { ...todo, editMode: !todo.editMode }
+              : { ...todo };
+          }),
+        ],
+      };
+    }
+
     default:
       return state;
   }
@@ -84,6 +102,11 @@ export const deleteTodo = (deleteTodoId) => ({
 export const setLastTaskId = (lastId) => ({
   type: SET_LAST_TASK_ID,
   lastId,
+});
+
+export const switchEditMode = (editTodoId) => ({
+  type: SWITCH_EDIT_MODE,
+  editTodoId,
 });
 
 export default todoReducer;

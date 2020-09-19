@@ -1,41 +1,86 @@
 import React from "react";
 import styles from "./TodoItem.module.css";
-const TodoItem = (props) => {
-  return (
-    <div className={styles.todoBlock}>
-      <div className={styles.titleRow} justify="space-around">
-        <div className={styles.titleRowTitle}>{props.title}</div>
-        <div>
-          <button
-            onClick={() => {
-              props.deleteTodo(props.id);
-            }}
-            className={styles.trashBtn}
-          >
-            Tr
-          </button>
-        </div>
-        <div>
-          <button className={styles.penBtn}>Ed</button>
-        </div>
-      </div>
+import { Field, reduxForm, Form, change } from "redux-form";
+import { connect } from "react-redux";
+class TodoItem extends React.Component {
+  componentDidMount() {
+    this.props.dispatch(
+      change("editTodo", "editTitle" + this.props.id, this.props.title)
+    );
+    this.props.dispatch(
+      change(
+        "editTodo",
+        "editDescription" + this.props.id,
+        this.props.description
+      )
+    );
+  }
 
-      <div className={styles.descriptionRow}>
-        <p>{props.description}</p>
-      </div>
-      <div className={styles.changeStateButtons} justify="space-around">
-        <div>
-          <button> {"<"} </button>
-        </div>
-        <div className={styles.priority}>
-          <span>{props.priority}</span>
-        </div>
-        <div>
-          <button> {">"} </button>
-        </div>
-      </div>
-    </div>
-  );
-};
+  render() {
+    return (
+      <Form onSubmit={this.props.handleSubmit}>
+        <div className={styles.todoBlock}>
+          <div className={styles.titleRow} justify="space-around">
+            {!this.props.editMode ? (
+              <div className={styles.titleRowTitle}>{this.props.title}</div>
+            ) : (
+              <Field
+                type={"text"}
+                name={"editTitle" + this.props.id}
+                component={"input"}
+              />
+            )}
 
-export default TodoItem;
+            <div>
+              <button
+                onClick={() => {
+                  this.props.deleteTodo(this.props.id);
+                }}
+                className={styles.trashBtn}
+              >
+                Tr
+              </button>
+            </div>
+            <div>
+              <button
+                onClick={() => {
+                  this.props.switchEditMode(this.props.id);
+                }}
+                className={styles.penBtn}
+              >
+                Ed
+              </button>
+            </div>
+          </div>
+
+          <div className={styles.descriptionRow}>
+            {!this.props.editMode ? (
+              <p>{this.props.description}</p>
+            ) : (
+              <Field
+                type={"text"}
+                name={"editDescription" + this.props.id}
+                component={"textarea"}
+              />
+            )}
+          </div>
+          <div className={styles.changeStateButtons} justify="space-around">
+            <div>
+              <button> {"<"} </button>
+            </div>
+            <div className={styles.priority}>
+              <span>{this.props.priority}</span>
+            </div>
+            <div>
+              <button> {">"} </button>
+            </div>
+          </div>
+        </div>
+      </Form>
+    );
+  }
+}
+
+export default reduxForm({
+  form: "editTodo",
+})(TodoItem);
