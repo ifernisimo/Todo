@@ -138,13 +138,7 @@ const todoReducer = (state = initialState, action) => {
   }
 };
 
-export const addNewTodo = (
-  id,
-  title,
-  description,
-  priority,
-  positionStatus
-) => ({
+export const addNewTodo = (id, title, description, priority) => ({
   type: ADD_NEW_TODO,
   payload: { id, title, description, priority, positionStatus: 0 },
 });

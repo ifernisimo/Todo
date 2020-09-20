@@ -2,8 +2,8 @@ import React from "react";
 import styles from "./DoneComponent.module.css";
 import TodoItemContainer from "../ui-kit/TodoItem/TodoItemContainer";
 
-const DoneComponent = (props) => {
-  let listOfTodo = props.todoArray.map(
+const DoneComponent = ({ todoArray }) => {
+  let listOfTodo = todoArray.map(
     (todo, idx) =>
       todo.positionStatus === 2 && (
         <TodoItemContainer
@@ -11,7 +11,8 @@ const DoneComponent = (props) => {
           description={todo.description}
           priority={todo.priority}
           id={todo.id}
-          key={idx}
+          editMode={todo.editMode}
+          key={todo.id}
         />
       )
   );

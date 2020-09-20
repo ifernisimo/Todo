@@ -1,7 +1,6 @@
 import React from "react";
 import styles from "./TodoComponent.module.css";
 import TodoItemContainer from "../ui-kit/TodoItem/TodoItemContainer";
-import TodoItemEditFormContainer from "../ui-kit/TodoItem/TodoItemEditFormContainer";
 
 const TodoListComponent = ({ todoArray }) => {
   let listOfTodo = todoArray.map(
@@ -16,14 +15,6 @@ const TodoListComponent = ({ todoArray }) => {
           key={todo.id}
         />
       )
-
-      // <TodoItemEditFormContainer
-      //   title={todo.title}
-      //   description={todo.description}
-      //   priority={todo.priority}
-      //   id={todo.id}
-      //   key={idx}
-      // />
   );
 
   return (

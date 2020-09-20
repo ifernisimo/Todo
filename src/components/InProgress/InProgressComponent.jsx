@@ -1,10 +1,9 @@
 import React from "react";
 import styles from "./InProgressComponent.module.css";
-import TodoItemEditFormContainer from "../ui-kit/TodoItem/TodoItemEditFormContainer";
 import TodoItemContainer from "../ui-kit/TodoItem/TodoItemContainer";
 
-const InProgressComponent = (props) => {
-  let listOfTodo = props.todoArray.map(
+const InProgressComponent = ({ todoArray }) => {
+  let listOfTodo = todoArray.map(
     (todo, idx) =>
       todo.positionStatus === 1 && (
         <TodoItemContainer
@@ -12,7 +11,8 @@ const InProgressComponent = (props) => {
           description={todo.description}
           priority={todo.priority}
           id={todo.id}
-          key={idx}
+          editMode={todo.editMode}
+          key={todo.id}
         />
       )
   );

@@ -45,7 +45,6 @@ class TodoItem extends React.Component {
             <div>
               <button
                 onClick={() => {
-                  //this.props.switchEditMode(this.props.id);
                   this.props.syncTodoObjects(
                     this.props.id,
                     this.props.title,

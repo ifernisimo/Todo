@@ -1,6 +1,5 @@
 import { connect } from "react-redux";
 import { compose } from "redux";
-import React from "react";
 import DoneComponent from "./DoneComponent";
 
 let mapStateToProps = (state) => {
