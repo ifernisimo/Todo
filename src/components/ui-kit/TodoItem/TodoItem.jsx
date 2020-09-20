@@ -1,7 +1,8 @@
 import React from "react";
 import styles from "./TodoItem.module.css";
-import { Field, reduxForm, Form, change } from "redux-form";
+import { Field, reduxForm, Form, change, getFormValues } from "redux-form";
 import { connect } from "react-redux";
+
 class TodoItem extends React.Component {
   componentDidMount() {
     this.props.dispatch(
@@ -44,7 +45,12 @@ class TodoItem extends React.Component {
             <div>
               <button
                 onClick={() => {
-                  this.props.switchEditMode(this.props.id);
+                  //this.props.switchEditMode(this.props.id);
+                  this.props.syncTodoObjects(
+                    this.props.id,
+                    this.props.title,
+                    this.props.description
+                  );
                 }}
                 className={styles.penBtn}
               >
@@ -66,13 +72,27 @@ class TodoItem extends React.Component {
           </div>
           <div className={styles.changeStateButtons} justify="space-around">
             <div>
-              <button> {"<"} </button>
+              <button
+                onClick={() => {
+                  this.props.moveToPrevList(this.props.id);
+                }}
+              >
+                {" "}
+                {"<"}{" "}
+              </button>
             </div>
             <div className={styles.priority}>
               <span>{this.props.priority}</span>
             </div>
             <div>
-              <button> {">"} </button>
+              <button
+                onClick={() => {
+                  this.props.moveToNextList(this.props.id);
+                }}
+              >
+                {" "}
+                {">"}{" "}
+              </button>
             </div>
           </div>
         </div>
@@ -81,6 +101,15 @@ class TodoItem extends React.Component {
   }
 }
 
-export default reduxForm({
-  form: "editTodo",
-})(TodoItem);
+const mapStateToProps = (state) => ({
+  formStates: getFormValues("editTodo")(state),
+});
+
+export default connect(
+  mapStateToProps,
+  {}
+)(
+  reduxForm({
+    form: "editTodo",
+  })(TodoItem)
+);

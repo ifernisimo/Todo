@@ -6,6 +6,7 @@ import InProgressComponent from "./components/InProgress/InProgressComponent";
 import TodoListComponentContainer from "./components/TodoList/TodoListComponentContainer";
 import AddTodoComponentContainer from "./components/AddTodoComponent/AddTodoComponentContainer";
 import InProgressComponentContainer from "./components/InProgress/InProgressComponentContainer";
+import DoneComponentContainer from "./components/Done/DoneComponentContainer";
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
 
         <InProgressComponentContainer />
 
-        <DoneComponent />
+        <DoneComponentContainer />
       </div>
     </>
   );

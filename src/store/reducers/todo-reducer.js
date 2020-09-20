@@ -1,8 +1,9 @@
 const ADD_NEW_TODO = "ADD_NEW_TODO";
 const DELETE_TODO = "DELETE_TODO";
 const SET_LAST_TASK_ID = "SET_LAST_TASK_ID";
-const SWITCH_EDIT_MODE = "SWITCH_EDIT_MODE";
-
+const SYNC_TODO_OBJECTS = "SYNC_TODO_OBJECTS";
+const MOVE_TO_NEXT_LIST = "MOVE_TO_NEXT_LIST";
+const MOVE_TO_PREV_LIST = "MOVE_TO_PREV_LIST";
 let initialState = {
   todoArray: [
     {
@@ -11,6 +12,7 @@ let initialState = {
       description: "4 пары утеряны в недрах в стиралки",
       priority: 5,
       editMode: false,
+      positionStatus: 0,
     },
     {
       id: 2,
@@ -18,6 +20,7 @@ let initialState = {
       description: "Не ну а че он",
       priority: 5,
       editMode: false,
+      positionStatus: 1,
     },
     {
       id: 3,
@@ -25,6 +28,7 @@ let initialState = {
       description: "Фраза - А че а в смысле?",
       priority: 5,
       editMode: false,
+      positionStatus: 2,
     },
     {
       id: 4,
@@ -32,6 +36,7 @@ let initialState = {
       description: "Готово",
       priority: 5,
       editMode: false,
+      positionStatus: 0,
     },
     {
       id: 5,
@@ -39,6 +44,7 @@ let initialState = {
       description: "сквозняк не шуточный",
       priority: 5,
       editMode: false,
+      positionStatus: 2,
     },
   ],
   lastTaskId: 5,
@@ -71,13 +77,56 @@ const todoReducer = (state = initialState, action) => {
       };
     }
 
-    case SWITCH_EDIT_MODE: {
+    case SYNC_TODO_OBJECTS: {
       return {
         ...state,
         todoArray: [
           ...state.todoArray.map((todo) => {
-            return todo.id === action.editTodoId
-              ? { ...todo, editMode: !todo.editMode }
+            return todo.id === action.todoId
+              ? {
+                  ...todo,
+                  editMode: !todo.editMode,
+                  title: action.newTitle,
+                  description: action.newDescription,
+                }
+              : { ...todo };
+          }),
+        ],
+      };
+    }
+
+    case MOVE_TO_NEXT_LIST: {
+      return {
+        ...state,
+        todoArray: [
+          ...state.todoArray.map((todo) => {
+            return todo.id === action.todoId
+              ? {
+                  ...todo,
+                  positionStatus:
+                    todo.positionStatus < 2
+                      ? todo.positionStatus + 1
+                      : todo.positionStatus,
+                }
+              : { ...todo };
+          }),
+        ],
+      };
+    }
+
+    case MOVE_TO_PREV_LIST: {
+      return {
+        ...state,
+        todoArray: [
+          ...state.todoArray.map((todo) => {
+            return todo.id === action.todoId
+              ? {
+                  ...todo,
+                  positionStatus:
+                    todo.positionStatus > 0
+                      ? todo.positionStatus - 1
+                      : todo.positionStatus,
+                }
               : { ...todo };
           }),
         ],
@@ -89,9 +138,15 @@ const todoReducer = (state = initialState, action) => {
   }
 };
 
-export const addNewTodo = (id, title, description, priority) => ({
+export const addNewTodo = (
+  id,
+  title,
+  description,
+  priority,
+  positionStatus
+) => ({
   type: ADD_NEW_TODO,
-  payload: { id, title, description, priority },
+  payload: { id, title, description, priority, positionStatus: 0 },
 });
 
 export const deleteTodo = (deleteTodoId) => ({
@@ -104,9 +159,21 @@ export const setLastTaskId = (lastId) => ({
   lastId,
 });
 
-export const switchEditMode = (editTodoId) => ({
-  type: SWITCH_EDIT_MODE,
-  editTodoId,
+export const syncTodoObjects = (todoId, newTitle, newDescription) => ({
+  type: SYNC_TODO_OBJECTS,
+  todoId,
+  newTitle,
+  newDescription,
+});
+
+export const moveToNextList = (todoId) => ({
+  type: MOVE_TO_NEXT_LIST,
+  todoId,
+});
+
+export const moveToPrevList = (todoId) => ({
+  type: MOVE_TO_PREV_LIST,
+  todoId,
 });
 
 export default todoReducer;

@@ -4,10 +4,6 @@ import React from "react";
 import InProgressComponent from "./InProgressComponent";
 import { initialize } from "redux-form";
 
-const InProgressComponentContainer = (props) => {
-  return <InProgressComponent {...props} />;
-};
-
 let mapStateToProps = (state) => {
   return {
     todoArray: state.todo.todoArray,
@@ -15,6 +11,8 @@ let mapStateToProps = (state) => {
   };
 };
 
-export default compose(connect(mapStateToProps, {}))(
-  InProgressComponentContainer
+const InProgressComponentContainer = compose(connect(mapStateToProps, {}))(
+  InProgressComponent
 );
+
+export default InProgressComponentContainer;
