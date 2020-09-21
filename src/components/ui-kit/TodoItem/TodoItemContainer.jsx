@@ -7,12 +7,15 @@ import {
   moveToNextList,
   moveToPrevList,
   syncTodoObjects,
+  toggleEditMode,
 } from "../../../store/reducers/todo-reducer";
 import formValueSelector from "redux-form/lib/formValueSelector";
 
 const TodoItemContainer = (props) => {
-  const handleSubmit = (formData) => {};
-  const initData = props.formStates;
+  const handleSubmit = (formData) => {
+    props.toggleEditMode(props.id);
+  };
+
   return <TodoItem {...props} onSubmit={handleSubmit} />;
 };
 
@@ -23,6 +26,7 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
   deleteTodo,
   syncTodoObjects,
+  toggleEditMode,
   moveToNextList,
   moveToPrevList,
 })(TodoItemContainer);

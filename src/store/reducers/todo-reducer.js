@@ -4,6 +4,7 @@ const SET_LAST_TASK_ID = "SET_LAST_TASK_ID";
 const SYNC_TODO_OBJECTS = "SYNC_TODO_OBJECTS";
 const MOVE_TO_NEXT_LIST = "MOVE_TO_NEXT_LIST";
 const MOVE_TO_PREV_LIST = "MOVE_TO_PREV_LIST";
+const TOGGLE_EDIT_MODE = "TOGGLE_EDIT_MODE";
 let initialState = {
   todoArray: [
     {
@@ -85,9 +86,24 @@ const todoReducer = (state = initialState, action) => {
             return todo.id === action.todoId
               ? {
                   ...todo,
-                  editMode: !todo.editMode,
                   title: action.newTitle,
                   description: action.newDescription,
+                }
+              : { ...todo };
+          }),
+        ],
+      };
+    }
+
+    case TOGGLE_EDIT_MODE: {
+      return {
+        ...state,
+        todoArray: [
+          ...state.todoArray.map((todo) => {
+            return todo.id === action.todoId
+              ? {
+                  ...todo,
+                  editMode: !todo.editMode, //Перенести edit mode в отдельный редюсер
                 }
               : { ...todo };
           }),
@@ -167,6 +183,11 @@ export const moveToNextList = (todoId) => ({
 
 export const moveToPrevList = (todoId) => ({
   type: MOVE_TO_PREV_LIST,
+  todoId,
+});
+
+export const toggleEditMode = (todoId) => ({
+  type: TOGGLE_EDIT_MODE,
   todoId,
 });
 

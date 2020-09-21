@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./TodoItem.module.css";
 import { Field, reduxForm, Form, change, getFormValues } from "redux-form";
 import { connect } from "react-redux";
+import handleSubmit from "redux-form/lib/handleSubmit";
 
 class TodoItem extends React.Component {
   componentDidMount() {
@@ -26,6 +27,16 @@ class TodoItem extends React.Component {
               <div className={styles.titleRowTitle}>{this.props.title}</div>
             ) : (
               <Field
+                onChange={() => {
+                  let currentTitle = "editTitle" + this.props.id;
+                  let currentDescription = "editDescription" + this.props.id;
+                  console.log(this.props);
+                  this.props.syncTodoObjects(
+                    this.props.id,
+                    this.props.formStates[currentTitle],
+                    this.props.formStates[currentDescription]
+                  );
+                }}
                 type={"text"}
                 name={"editTitle" + this.props.id}
                 component={"input"}
@@ -63,6 +74,16 @@ class TodoItem extends React.Component {
               <p>{this.props.description}</p>
             ) : (
               <Field
+                onChange={() => {
+                  let currentTitle = "editTitle" + this.props.id;
+                  let currentDescription = "editDescription" + this.props.id;
+                  console.log(this.props);
+                  this.props.syncTodoObjects(
+                    this.props.id,
+                    this.props.formStates[currentTitle],
+                    this.props.formStates[currentDescription]
+                  );
+                }}
                 type={"text"}
                 name={"editDescription" + this.props.id}
                 component={"textarea"}
