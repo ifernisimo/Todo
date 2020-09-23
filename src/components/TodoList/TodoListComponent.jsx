@@ -14,6 +14,7 @@ const TodoListComponent = ({ todoArray }) => {
           id={todo.id}
           editMode={todo.editMode}
           key={todo.id}
+          positionStatus={todo.positionStatus}
         />
       )
   );

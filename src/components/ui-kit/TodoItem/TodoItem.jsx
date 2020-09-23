@@ -103,28 +103,32 @@ class TodoItem extends React.Component {
           </div>
           <div className={styles.changeStateButtons} justify="space-around">
             <div>
-              <button
-                onClick={() => {
-                  this.props.moveToPrevList(this.props.id);
-                }}
-              >
-                {" "}
-                {"<"}{" "}
-              </button>
+              {this.props.positionStatus >= 1 && (
+                <button
+                  onClick={() => {
+                    this.props.moveToPrevList(this.props.id);
+                  }}
+                >
+                  {" "}
+                  {"<"}{" "}
+                </button>
+              )}
             </div>
             <div className={styles.priority}>
               <span>{this.props.priority}</span>
             </div>
             <div>
-              <button
-                onClick={(event) => {
-                  event.preventDefault();
-                  this.props.moveToNextList(this.props.id);
-                }}
-              >
-                {" "}
-                {">"}{" "}
-              </button>
+              {this.props.positionStatus <= 1 && (
+                <button
+                  onClick={(event) => {
+                    event.preventDefault();
+                    this.props.moveToNextList(this.props.id);
+                  }}
+                >
+                  {" "}
+                  {">"}{" "}
+                </button>
+              )}
             </div>
           </div>
         </div>
