@@ -3,6 +3,7 @@ import styles from "./DoneComponent.module.css";
 import TodoItemContainer from "../ui-kit/TodoItem/TodoItemContainer";
 
 const DoneComponent = ({ todoArray }) => {
+  console.log("Done" + todoArray);
   let listOfTodo = todoArray.map(
     (todo, idx) =>
       todo.positionStatus === 2 && (

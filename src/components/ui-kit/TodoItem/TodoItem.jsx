@@ -1,16 +1,24 @@
 import React from "react";
 import styles from "./TodoItem.module.css";
-import { Field, reduxForm, Form, change, getFormValues } from "redux-form";
+import {
+  Field,
+  reduxForm,
+  Form,
+  change,
+  getFormValues,
+  stopSubmit,
+  autofill,
+} from "redux-form";
 import { connect } from "react-redux";
 import handleSubmit from "redux-form/lib/handleSubmit";
 
 class TodoItem extends React.Component {
   componentDidMount() {
     this.props.dispatch(
-      change("editTodo", "editTitle" + this.props.id, this.props.title)
+      autofill("editTodo", "editTitle" + this.props.id, this.props.title)
     );
     this.props.dispatch(
-      change(
+      autofill(
         "editTodo",
         "editDescription" + this.props.id,
         this.props.description
@@ -19,8 +27,10 @@ class TodoItem extends React.Component {
   }
 
   render() {
+    const { handleSubmit } = this.props;
+
     return (
-      <Form onSubmit={this.props.handleSubmit}>
+      <Form onSubmit={handleSubmit}>
         <div className={styles.todoBlock}>
           <div className={styles.titleRow} justify="space-around">
             {!this.props.editMode ? (
@@ -55,6 +65,7 @@ class TodoItem extends React.Component {
             </div>
             <div>
               <button
+                type={"submit"}
                 onClick={() => {
                   this.props.syncTodoObjects(
                     this.props.id,
@@ -106,7 +117,8 @@ class TodoItem extends React.Component {
             </div>
             <div>
               <button
-                onClick={() => {
+                onClick={(event) => {
+                  event.preventDefault();
                   this.props.moveToNextList(this.props.id);
                 }}
               >

@@ -5,44 +5,49 @@ const SYNC_TODO_OBJECTS = "SYNC_TODO_OBJECTS";
 const MOVE_TO_NEXT_LIST = "MOVE_TO_NEXT_LIST";
 const MOVE_TO_PREV_LIST = "MOVE_TO_PREV_LIST";
 const TOGGLE_EDIT_MODE = "TOGGLE_EDIT_MODE";
+
 let initialState = {
   todoArray: [
     {
       id: 1,
       title: "Купить носки",
-      description: "4 пары утеряны в недрах в стиралки",
+      description: "300 едениц утрачены в безднах стиралки ",
       priority: 5,
       editMode: false,
       positionStatus: 0,
     },
     {
       id: 2,
-      title: "Убить велосипед",
-      description: "Не ну а че он",
+      title: "Не забыть на рыбалку",
+      description: "Газовая горелка, кресла, прикормка, сулугуни, друзей",
       priority: 5,
       editMode: false,
       positionStatus: 1,
     },
     {
       id: 3,
-      title: "Понять и принять смысл фразы",
-      description: "Фраза - А че а в смысле?",
+      title: "Тренеровка по боксу",
+      description: "17:00 спорт клуб Магнус",
       priority: 5,
       editMode: false,
       positionStatus: 2,
     },
     {
       id: 4,
-      title: "Любить свою малышку",
-      description: "Готово",
+      title: "Бизнес конфа",
+      description: "Гагарин плаза 20:00 17.09",
       priority: 5,
       editMode: false,
       positionStatus: 0,
     },
     {
       id: 5,
-      title: "Закрывать двери",
-      description: "сквозняк не шуточный",
+      title: "Длинный текст",
+      description:
+        "авно выяснено, что при оценке дизайна и композиции читаемый текст мешает " +
+        "сосредоточиться. Lorem Ipsum используют потому, что тот обеспечивает более" +
+        " или менее стандартное заполнение шаблона, а также реальное распределение букв и " +
+        "пробелов в абзацах, которое не получается при простой дубликации ",
       priority: 5,
       editMode: false,
       positionStatus: 2,

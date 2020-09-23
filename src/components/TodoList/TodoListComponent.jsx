@@ -3,6 +3,7 @@ import styles from "./TodoComponent.module.css";
 import TodoItemContainer from "../ui-kit/TodoItem/TodoItemContainer";
 
 const TodoListComponent = ({ todoArray }) => {
+  console.log("Todos list" + todoArray);
   let listOfTodo = todoArray.map(
     (todo, idx) =>
       todo.positionStatus === 0 && (
