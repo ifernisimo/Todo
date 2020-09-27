@@ -3,9 +3,8 @@ import styles from "./InProgressComponent.module.css";
 import TodoItemContainer from "../ui-kit/TodoItem/TodoItemContainer";
 
 const InProgressComponent = ({ todoArray }) => {
-  console.log("In progress" + todoArray);
   let listOfTodo = todoArray.map(
-    (todo, idx) =>
+    (todo) =>
       todo.positionStatus === 1 && (
         <TodoItemContainer
           title={todo.title}

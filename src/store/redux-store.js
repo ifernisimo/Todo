@@ -3,6 +3,7 @@ import thunkMiddleware from "redux-thunk";
 import generalReducer from "./reducers/general-reducer";
 import todoReducer from "./reducers/todo-reducer";
 import { reducer as formReducer } from "redux-form";
+import { createLogger } from "redux-logger";
 
 let reducers = combineReducers({
   general: generalReducer,
@@ -10,7 +11,11 @@ let reducers = combineReducers({
   form: formReducer,
 });
 
-let store = createStore(reducers, applyMiddleware(thunkMiddleware));
+const logger = createLogger({
+  diff: true,
+});
+
+let store = createStore(reducers, applyMiddleware(thunkMiddleware, logger));
 
 window.store = store;
 

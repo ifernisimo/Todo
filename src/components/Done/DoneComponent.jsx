@@ -3,9 +3,8 @@ import styles from "./DoneComponent.module.css";
 import TodoItemContainer from "../ui-kit/TodoItem/TodoItemContainer";
 
 const DoneComponent = ({ todoArray }) => {
-  console.log("Done" + todoArray);
   let listOfTodo = todoArray.map(
-    (todo, idx) =>
+    (todo) =>
       todo.positionStatus === 2 && (
         <TodoItemContainer
           title={todo.title}
@@ -21,7 +20,7 @@ const DoneComponent = ({ todoArray }) => {
 
   return (
     <div className={styles.doneBlock}>
-      <h1>В работе</h1>
+      <h1>Завершенные</h1>
       <hr />
       {listOfTodo}
     </div>

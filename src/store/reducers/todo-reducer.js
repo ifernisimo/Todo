@@ -20,7 +20,7 @@ let initialState = {
       id: 2,
       title: "Не забыть на рыбалку",
       description: "Газовая горелка, кресла, прикормка, сулугуни, друзей",
-      priority: 5,
+      priority: 3,
       editMode: false,
       positionStatus: 1,
     },
@@ -28,7 +28,7 @@ let initialState = {
       id: 3,
       title: "Тренеровка по боксу",
       description: "17:00 спорт клуб Магнус",
-      priority: 5,
+      priority: 4,
       editMode: false,
       positionStatus: 2,
     },
@@ -36,7 +36,7 @@ let initialState = {
       id: 4,
       title: "Бизнес конфа",
       description: "Гагарин плаза 20:00 17.09",
-      priority: 5,
+      priority: 4,
       editMode: false,
       positionStatus: 0,
     },
@@ -48,7 +48,7 @@ let initialState = {
         "сосредоточиться. Lorem Ipsum используют потому, что тот обеспечивает более" +
         " или менее стандартное заполнение шаблона, а также реальное распределение букв и " +
         "пробелов в абзацах, которое не получается при простой дубликации ",
-      priority: 5,
+      priority: 1,
       editMode: false,
       positionStatus: 2,
     },
@@ -68,11 +68,9 @@ const todoReducer = (state = initialState, action) => {
     case DELETE_TODO: {
       return {
         ...state,
-        todoArray: [
-          ...state.todoArray.filter((todo) => {
-            return todo.id !== action.deleteTodoId;
-          }),
-        ],
+        todoArray: state.todoArray.filter((todo) => {
+          return todo.id !== action.deleteTodoId;
+        }),
       };
     }
 
@@ -86,71 +84,65 @@ const todoReducer = (state = initialState, action) => {
     case SYNC_TODO_OBJECTS: {
       return {
         ...state,
-        todoArray: [
-          ...state.todoArray.map((todo) => {
-            return todo.id === action.todoId
-              ? {
-                  ...todo,
-                  title: action.newTitle,
-                  description: action.newDescription,
-                }
-              : { ...todo };
-          }),
-        ],
+        todoArray: state.todoArray.map((todo) => {
+          return todo.id === action.todoId
+            ? {
+                ...todo,
+                title: action.newTitle,
+                description: action.newDescription,
+              }
+            : todo;
+        }),
       };
     }
 
     case TOGGLE_EDIT_MODE: {
       return {
         ...state,
-        todoArray: [
-          ...state.todoArray.map((todo) => {
-            return todo.id === action.todoId
-              ? {
-                  ...todo,
-                  editMode: !todo.editMode, //Перенести edit mode в отдельный редюсер
-                }
-              : { ...todo };
-          }),
-        ],
+        todoArray: state.todoArray.map((todo) => {
+          return todo.id === action.todoId
+            ? {
+                ...todo,
+                editMode: !todo.editMode,
+              }
+            : { ...todo, editMode: false };
+        }),
       };
     }
 
     case MOVE_TO_NEXT_LIST: {
       return {
         ...state,
-        todoArray: [
-          ...state.todoArray.map((todo) => {
-            return todo.id === action.todoId
-              ? {
-                  ...todo,
-                  positionStatus:
-                    todo.positionStatus < 2
-                      ? todo.positionStatus + 1
-                      : todo.positionStatus,
-                }
-              : { ...todo };
-          }),
-        ],
+        todoArray: state.todoArray.map((todo) => {
+          return todo.id === action.todoId
+            ? {
+                ...todo,
+                positionStatus:
+                  todo.positionStatus <= 1
+                    ? todo.positionStatus + 1
+                    : todo.positionStatus,
+                editMode: false,
+              }
+            : { ...todo, editMode: false };
+        }),
       };
     }
 
     case MOVE_TO_PREV_LIST: {
       return {
         ...state,
-        todoArray: [
-          ...state.todoArray.map((todo) => {
-            return todo.id === action.todoId
-              ? {
-                  ...todo,
-                  positionStatus:
-                    todo.positionStatus > 0
-                      ? todo.positionStatus - 1
-                      : todo.positionStatus,
-                }
-              : { ...todo };
-          }),
-        ],
+        todoArray: state.todoArray.map((todo) => {
+          return todo.id === action.todoId
+            ? {
+                ...todo,
+                positionStatus:
+                  todo.positionStatus >= 1
+                    ? todo.positionStatus - 1
+                    : todo.positionStatus,
+                editMode: false,
+              }
+            : { ...todo, editMode: false };
+        }),
       };
     }
 

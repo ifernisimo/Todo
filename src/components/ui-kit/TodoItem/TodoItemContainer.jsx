@@ -9,7 +9,6 @@ import {
   syncTodoObjects,
   toggleEditMode,
 } from "../../../store/reducers/todo-reducer";
-import formValueSelector from "redux-form/lib/formValueSelector";
 
 const TodoItemContainer = (props) => {
   const handleSubmit = (formData) => {

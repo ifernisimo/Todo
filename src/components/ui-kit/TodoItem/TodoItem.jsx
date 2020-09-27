@@ -6,31 +6,27 @@ import {
   Form,
   change,
   getFormValues,
-  stopSubmit,
-  autofill,
+  initialize,
 } from "redux-form";
 import { connect } from "react-redux";
-import handleSubmit from "redux-form/lib/handleSubmit";
 
 class TodoItem extends React.Component {
-  componentDidMount() {
+  handleSomething = () => {
     this.props.dispatch(
-      autofill("editTodo", "editTitle" + this.props.id, this.props.title)
+      change("editTodo", "editTitle" + this.props.id, this.props.title)
     );
     this.props.dispatch(
-      autofill(
+      change(
         "editTodo",
         "editDescription" + this.props.id,
         this.props.description
       )
     );
-  }
+  };
 
   render() {
-    const { handleSubmit } = this.props;
-
     return (
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={this.props.handleSubmit}>
         <div className={styles.todoBlock}>
           <div className={styles.titleRow} justify="space-around">
             {!this.props.editMode ? (
@@ -55,6 +51,7 @@ class TodoItem extends React.Component {
 
             <div>
               <button
+                type={"button"}
                 onClick={() => {
                   this.props.deleteTodo(this.props.id);
                 }}
@@ -65,13 +62,15 @@ class TodoItem extends React.Component {
             </div>
             <div>
               <button
-                type={"submit"}
+                type={"button"}
                 onClick={() => {
+                  this.props.toggleEditMode(this.props.id);
                   this.props.syncTodoObjects(
                     this.props.id,
                     this.props.title,
                     this.props.description
                   );
+                  this.handleSomething();
                 }}
                 className={styles.penBtn}
               >
@@ -105,8 +104,11 @@ class TodoItem extends React.Component {
             <div>
               {this.props.positionStatus >= 1 && (
                 <button
-                  onClick={() => {
+                  type="button"
+                  onClick={(e) => {
+                    e.preventDefault();
                     this.props.moveToPrevList(this.props.id);
+                    this.handleSomething();
                   }}
                 >
                   {" "}
@@ -120,9 +122,11 @@ class TodoItem extends React.Component {
             <div>
               {this.props.positionStatus <= 1 && (
                 <button
-                  onClick={(event) => {
-                    event.preventDefault();
+                  type="button"
+                  onClick={(e) => {
+                    e.preventDefault();
                     this.props.moveToNextList(this.props.id);
+                    this.handleSomething();
                   }}
                 >
                   {" "}
