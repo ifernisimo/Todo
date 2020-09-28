@@ -15,7 +15,23 @@ const TodoItemContainer = (props) => {
     props.toggleEditMode(props.id);
   };
 
-  return <TodoItem {...props} onSubmit={handleSubmit} />;
+  const onChangeSyncFields = (id) => {
+    let currentTitle = "editTitle" + id;
+    let currentDescription = "editDescription" + id;
+    props.syncTodoObjects(
+      id,
+      props.formStates[currentTitle],
+      props.formStates[currentDescription]
+    );
+  };
+
+  return (
+    <TodoItem
+      {...props}
+      onSubmit={handleSubmit}
+      onChangeSyncFields={onChangeSyncFields}
+    />
+  );
 };
 
 const mapStateToProps = (state) => ({

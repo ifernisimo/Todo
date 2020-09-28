@@ -1,14 +1,12 @@
 import React from "react";
 import styles from "./TodoItem.module.css";
-import {
-  Field,
-  reduxForm,
-  Form,
-  change,
-  getFormValues,
-  initialize,
-} from "redux-form";
+import { Field, reduxForm, Form, change, getFormValues } from "redux-form";
 import { connect } from "react-redux";
+import trashIcon from "../../../assets/images/trashIcon.svg";
+
+import editIcon from "../../../assets/images/editIcon.svg";
+
+import arrow from "../../../assets/images/arrow.svg";
 
 class TodoItem extends React.Component {
   handleSomething = () => {
@@ -24,6 +22,32 @@ class TodoItem extends React.Component {
     );
   };
 
+  onClickEditMode = (id, title, description) => {
+    this.props.toggleEditMode(id);
+    this.props.syncTodoObjects(id, title, description);
+    this.handleSomething();
+  };
+
+  onChangeTextarea = (id) => {
+    let currentTitle = "editTitle" + id;
+    let currentDescription = "editDescription" + id;
+    this.props.syncTodoObjects(
+      this.props.id,
+      this.props.formStates[currentTitle],
+      this.props.formStates[currentDescription]
+    );
+  };
+
+  onClickToNextList = (id) => {
+    this.props.moveToPrevList(id);
+    this.handleSomething();
+  };
+
+  onClickToPrevList = (id) => {
+    this.props.moveToNextList(id);
+    this.handleSomething();
+  };
+
   render() {
     return (
       <Form onSubmit={this.props.handleSubmit}>
@@ -34,14 +58,7 @@ class TodoItem extends React.Component {
             ) : (
               <Field
                 onChange={() => {
-                  let currentTitle = "editTitle" + this.props.id;
-                  let currentDescription = "editDescription" + this.props.id;
-                  console.log(this.props);
-                  this.props.syncTodoObjects(
-                    this.props.id,
-                    this.props.formStates[currentTitle],
-                    this.props.formStates[currentDescription]
-                  );
+                  this.props.onChangeSyncFields(this.props.id);
                 }}
                 type={"text"}
                 name={"editTitle" + this.props.id}
@@ -57,24 +74,22 @@ class TodoItem extends React.Component {
                 }}
                 className={styles.trashBtn}
               >
-                Tr
+                <img src={trashIcon} alt="Delete Task" />
               </button>
             </div>
             <div>
               <button
                 type={"button"}
                 onClick={() => {
-                  this.props.toggleEditMode(this.props.id);
-                  this.props.syncTodoObjects(
+                  this.onClickEditMode(
                     this.props.id,
                     this.props.title,
                     this.props.description
                   );
-                  this.handleSomething();
                 }}
                 className={styles.penBtn}
               >
-                Ed
+                <img src={editIcon} alt="Edit Task" />
               </button>
             </div>
           </div>
@@ -85,15 +100,9 @@ class TodoItem extends React.Component {
             ) : (
               <Field
                 onChange={() => {
-                  let currentTitle = "editTitle" + this.props.id;
-                  let currentDescription = "editDescription" + this.props.id;
-                  console.log(this.props);
-                  this.props.syncTodoObjects(
-                    this.props.id,
-                    this.props.formStates[currentTitle],
-                    this.props.formStates[currentDescription]
-                  );
+                  this.onChangeTextarea(this.props.id);
                 }}
+                className={styles.taskTextarea}
                 type={"text"}
                 name={"editDescription" + this.props.id}
                 component={"textarea"}
@@ -106,13 +115,14 @@ class TodoItem extends React.Component {
                 <button
                   type="button"
                   onClick={(e) => {
-                    e.preventDefault();
-                    this.props.moveToPrevList(this.props.id);
-                    this.handleSomething();
+                    this.onClickToNextList(this.props.id);
                   }}
                 >
-                  {" "}
-                  {"<"}{" "}
+                  <img
+                    className={styles.prevListIcon}
+                    src={arrow}
+                    alt="Prev list"
+                  />
                 </button>
               )}
             </div>
@@ -124,13 +134,14 @@ class TodoItem extends React.Component {
                 <button
                   type="button"
                   onClick={(e) => {
-                    e.preventDefault();
-                    this.props.moveToNextList(this.props.id);
-                    this.handleSomething();
+                    this.onClickToPrevList(this.props.id);
                   }}
                 >
-                  {" "}
-                  {">"}{" "}
+                  <img
+                    className={styles.nextListIcon}
+                    src={arrow}
+                    alt="Next list"
+                  />
                 </button>
               )}
             </div>
