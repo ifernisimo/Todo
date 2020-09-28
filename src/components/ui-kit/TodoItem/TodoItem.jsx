@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import trashIcon from "../../../assets/images/trashIcon.svg";
 
 import editIcon from "../../../assets/images/editIcon.svg";
-
+import doneIcon from "../../../assets/images/done.svg";
 import arrow from "../../../assets/images/arrow.svg";
 
 class TodoItem extends React.Component {
@@ -127,7 +127,13 @@ class TodoItem extends React.Component {
               )}
             </div>
             <div className={styles.priority}>
-              <span>{this.props.priority}</span>
+              {this.props.positionStatus === 2 ? (
+                <span>
+                  <img src={doneIcon} alt="Done icon" />
+                </span>
+              ) : (
+                <span>{this.props.priority}</span>
+              )}
             </div>
             <div>
               {this.props.positionStatus <= 1 && (
@@ -137,11 +143,7 @@ class TodoItem extends React.Component {
                     this.onClickToPrevList(this.props.id);
                   }}
                 >
-                  <img
-                    className={styles.nextListIcon}
-                    src={arrow}
-                    alt="Next list"
-                  />
+                  <img src={arrow} alt="Next list" />
                 </button>
               )}
             </div>
